@@ -1,4 +1,4 @@
-import Nav from "./assets/components/pages/Nav"
+import Nav from "./assets/components/Nav"
 function App() {
 
   return (
