@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { login } from "../api/auth";
+import { login } from "../api/api";
 
 export default function Sign(){
 
@@ -9,13 +9,16 @@ export default function Sign(){
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        console.log("handle submit");
         
   
         try {
           const userData = await login(email, password);
-          console.log("Utilisateur connecté :", userData);
-          // Ici, tu peux stocker le token dans le localStorage ou le context si besoin
+          console.log("Token :", userData.token);
+
+          if(userData.token){
+            localStorage.setItem("jwt",userData.token)
+          }
+          
     
           setEmail("");
           setPassword("");
