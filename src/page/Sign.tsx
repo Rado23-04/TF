@@ -5,23 +5,26 @@ export default function Sign(){
 
     const [email,setEmail] = useState<string>("");
     const [password, setPassword] = useState<string> ("");
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = async(e:any) => {
+    const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
+        console.log("handle submit");
+        
   
         try {
-            const addUser = await login(email,password)
-        } catch (error) {
-            throw error
+          const userData = await login(email, password);
+          console.log("Utilisateur connecté :", userData);
+          // Ici, tu peux stocker le token dans le localStorage ou le context si besoin
+    
+          setEmail("");
+          setPassword("");
+        } catch (error: any) {
+          console.error("Erreur de connexion :", error);
+          setError("Échec de la connexion. Vérifiez vos identifiants.");
         }
-        const newEmail = email;
-        const newPassword = password;
-
-        setEmail("");
-        setPassword("");
-
+        e.preventDefault();
       };
-
     return (<>
        <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="form-container p-4 bg-white rounded shadow">
