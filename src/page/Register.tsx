@@ -20,6 +20,7 @@ export default function Register (){
             setPassword("")
             setRole("")
             setUsername("")
+            alert("User created")
         } catch (error) {
             console.error("Error",error)
             setError("Error")

@@ -1,11 +1,14 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { login } from "../api/api";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Sign(){
 
     const [email,setEmail] = useState<string>("");
     const [password, setPassword] = useState<string> ("");
     const [error, setError] = useState<string | null>(null);
+    const auth = useContext(AuthContext)
+
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
@@ -13,13 +16,9 @@ export default function Sign(){
   
         try {
           const userData = await login(email, password);
-          console.log("Token :", userData.token);
+          console.log("Token :", userData);
+          auth?.login(userData.token,{email})
 
-          if(userData.token){
-            localStorage.setItem("jwt",userData.token)
-          }
-          
-    
           setEmail("");
           setPassword("");
         } catch (error: any) {
