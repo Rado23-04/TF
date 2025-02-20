@@ -1,12 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Login from './Login';
-import Dashboard from './Dashboard';
-import Task from './Task';
 
 function Nav() {
   return (
     <>
-      <Router>
+     
         {/* Barre de navigation stylisée avec Bootstrap et animations */}
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-lg fixed-top">
           <div className="container">
@@ -24,8 +21,8 @@ function Nav() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item mx-2">
-                  <Link to="/login" className="nav-link text-white hover-effect">
-                    Login
+                  <Link to="/" className="nav-link text-white hover-effect">
+                    Save
                   </Link>
                 </li>
                 <li className="nav-item mx-2">
@@ -34,8 +31,8 @@ function Nav() {
                   </Link>
                 </li>
                 <li className="nav-item mx-2">
-                  <Link to="/task" className="nav-link text-white hover-effect">
-                    Task
+                  <Link to="/save" className="nav-link text-white hover-effect">
+                    Login
                   </Link>
                 </li>
               </ul>
@@ -44,14 +41,7 @@ function Nav() {
         </nav>
 
         {/* Contenu des routes avec un espace pour la barre de navigation fixe */}
-        <div className="container mt-5 pt-5">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/task" element={<Task />} />
-          </Routes>
-        </div>
-      </Router>
+  
 
       {/* Styles supplémentaires pour les animations */}
       <style>
