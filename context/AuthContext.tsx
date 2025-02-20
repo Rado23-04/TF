@@ -13,7 +13,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 const decodeToken = (token:string) =>{
     try {
-        return jwtDecode(token)
+        return jwtDecode<{ sub: string; exp: number }>(token);
     } catch (error) {
         console.error("Error", error)
     }
@@ -28,7 +28,7 @@ export const AuthProvider = ({children}:{children:React.ReactNode})=>{
         if(token){
             const decodeUser = decodeToken(token)
             if(decodeUser){
-                setUser(decodeUser)
+                setUser({ email: decodeUser.sub }); 
             }
         }
     },[token])
