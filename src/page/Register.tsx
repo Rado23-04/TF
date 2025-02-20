@@ -31,7 +31,7 @@ export default function Register (){
     return (<>
         <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="form-container p-4 bg-white rounded shadow">
-        <h2 className="text-center mb-4">Connexion</h2>
+        <h2 className="text-center mb-4">New user</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
