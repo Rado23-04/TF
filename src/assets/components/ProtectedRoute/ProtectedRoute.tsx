@@ -4,5 +4,8 @@ import { Navigate, Outlet } from "react-router-dom"
 
 export const ProtectedRoute = () =>{
     const auth = useContext(AuthContext)
-    return auth?.isAuthenticated ? <Outlet/> : <Navigate to="/login"/>
+    if(!auth?.isAuthenticated || !auth.user){
+        return <Navigate to="/save" replace/>
+    }
+    return <Outlet/>
 }
