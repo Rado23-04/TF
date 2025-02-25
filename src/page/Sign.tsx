@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import { login } from "../api/api";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Sign(){
 
@@ -8,6 +9,7 @@ export default function Sign(){
     const [password, setPassword] = useState<string> ("");
     const [error, setError] = useState<string | null>(null);
     const auth = useContext(AuthContext)
+    const navigate = useNavigate();
 
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
@@ -16,11 +18,18 @@ export default function Sign(){
   
         try {
           const userData = await login(email, password);
-          console.log("Token :", userData);
-          auth?.login(userData.token,{email})
+        //  console.log("Token :", userData);
+         // auth?.login(userData.token,{email})
 
           setEmail("");
           setPassword("");
+          if (userData?.succes) {
+            auth?.login(userData.token, { email });
+            navigate("/task");
+          } else {
+            console.error("Connexion échouée : ", userData);
+            setError("Échec de la connexion. Vérifiez vos identifiants.");
+          }
         } catch (error: any) {
           console.error("Erreur de connexion :", error);
           setError("Échec de la connexion. Vérifiez vos identifiants.");
