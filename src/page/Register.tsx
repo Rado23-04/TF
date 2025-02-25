@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { saveUser } from "../api/api";
 
+
 export default function Register (){
 
     const [email,setEmail] = useState<string>("");
@@ -20,7 +21,6 @@ export default function Register (){
             setPassword("")
             setRole("")
             setUsername("")
-            alert("User created")
         } catch (error) {
             console.error("Error",error)
             setError("Error")

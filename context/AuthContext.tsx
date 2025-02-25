@@ -22,14 +22,20 @@ const decodeToken = (token:string) =>{
 export const AuthProvider = ({children}:{children:React.ReactNode})=>{
     const [token,setToken] = useState<string|null>(localStorage.getItem("jwt"));
     const [user,setUser] = useState<any>(null);
-
+    const [isAuthenticated,setAuthenticated] = useState<boolean>(false);
 
     useEffect(()=>{
         if(token){
+            const currentTime = Math.floor(Date.now()/1000);
             const decodeUser = decodeToken(token)
-            if(decodeUser){
+            if(decodeUser && decodeUser.exp>currentTime){
                 setUser({ email: decodeUser.sub }); 
+                setAuthenticated(true);
+            }else{
+                logout()
             }
+        }else{
+            setAuthenticated(false)
         }
     },[token])
 
