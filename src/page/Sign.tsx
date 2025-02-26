@@ -18,8 +18,8 @@ export default function Sign(){
   
         try {
           const userData = await login(email, password);
-        //  console.log("Token :", userData);
-         // auth?.login(userData.token,{email})
+          console.log("Token :", userData);
+          auth?.login(userData.token,{email})
 
           setEmail("");
           setPassword("");
