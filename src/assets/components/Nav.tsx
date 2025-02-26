@@ -22,7 +22,7 @@ function Nav() {
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item mx-2">
                   <Link to="/" className="nav-link text-white hover-effect">
-                    Save
+                    Sign in
                   </Link>
                 </li>
                 <li className="nav-item mx-2">
