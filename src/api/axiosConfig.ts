@@ -1,12 +1,19 @@
 import axios from 'axios';
-const api = axios.create({
-    baseURL : "http://localhost:8080/auth",   
+export const apiUser = axios.create({
+    baseURL : "http://localhost:8081/auth",   
     headers: {
         "Content-Type": "application/json"
     },
 })
 
-api.interceptors.request.use(
+export const apiTask = axios.create({
+    baseURL :"http://localhost:8081/task",
+    headers:{
+        "Content-Type": "application/json"
+    },
+})
+
+apiUser.interceptors.request.use(
     (config) =>{
         const token= localStorage.getItem("jwt");
         if(token){
@@ -19,4 +26,3 @@ api.interceptors.request.use(
     }
 )
 
-export default api;
