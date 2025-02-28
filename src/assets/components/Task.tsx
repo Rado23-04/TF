@@ -1,4 +1,190 @@
-import { useState} from "react";
+import React,{useEffect, useState} from "react";
+import { getTasks } from "../../api/api";
+
+//type Status = "TODO" | "IN_PROGRESS" | "DONE";
+//type Priority = "LOW" | "MEDIUM" | "HIGH";
+
+
+ interface TaskProjection {
+  email: string;
+  date: string;
+  priority: string;
+  status: string;
+  title: string;
+}
+ 
+
+
+{/** <p className="text-sm text-gray-600">Assigned to: {task.user?.id ?? "Unknown"}</p>*/}
+
+const TaskList: React.FC = () => {
+    const [task, setTask] = useState<TaskProjection[]>([]);
+    const [loading, setLoading] =useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try  {
+              const response = await getTasks();
+              setTask(response);
+            }catch(error){
+              setError("Failed to load tasks")
+            }finally{
+              setLoading(false)
+            }
+        }
+        fetchTasks();
+    },[])
+
+    if(loading) return <p>Loading...</p>
+    if(error) return <p className="text-red-500">{error}</p>
+
+  return (
+    <div className="flex flex-wrap gap-4 p-4">
+      {task.map((task) => (
+        <div
+          key={task.title}
+          className="w-64 p-4 bg-white shadow-lg rounded-xl border border-gray-200"
+        >
+          <h2 className="text-lg font-bold">{task.title}</h2>
+          <p className="text-sm text-gray-600">Status: {task.status}</p>
+          <p className="text-sm text-gray-600">Priority: {task.priority}</p>
+          <p className="text-sm text-gray-600">Due Date: {task.date}</p>
+          <p className="text-sm text-gray-600">Assigned to: {task.email}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default TaskList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * import { useState} from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -81,3 +267,5 @@ export default function Task() {
     </DndProvider>
   );
 }
+
+ */

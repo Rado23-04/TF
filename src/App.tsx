@@ -12,9 +12,10 @@ function App() {
         <Nav/>
             <Routes>
                 <Route path="/" element={<Register />} />
+                <Route path='/save' element = {<Sign/>}/>
+
                 <Route element={<ProtectedRoute />}>
                     <Route path='/task' element = {<Task/>}/>
-                    <Route path='/save' element = {<Sign/>}/>
                 </Route>
             </Routes>
         </Router>
